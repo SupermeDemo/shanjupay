@@ -1,11 +1,21 @@
 package com.shanjupay.merchant.service;
 
+import com.alibaba.fastjson.JSON;
 import com.shanjupay.merchant.api.MerchantService;
 import com.shanjupay.merchant.api.dto.MerchantDTO;
 import com.shanjupay.merchant.entity.Merchant;
 import com.shanjupay.merchant.mapper.MerchantMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description: MerchantServiceImpl
@@ -15,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 0.1.0
  */
 @Service
+@Slf4j
 public class MerchantServiceImpl implements MerchantService {
 
     @Autowired
@@ -33,4 +44,6 @@ public class MerchantServiceImpl implements MerchantService {
         merchantDTO.setMerchantName(merchant.getMerchantName());
         return merchantDTO;
     }
+
+
 }

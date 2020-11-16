@@ -2,6 +2,8 @@ package com.shanjupay.merchant.api;
 
 import com.shanjupay.merchant.api.dto.MerchantDTO;
 
+import java.util.List;
+
 /**
  * @Description: MerchantService
  * @author: oldmonk
@@ -17,4 +19,7 @@ public interface MerchantService {
      */
     //根据 id查询商户
     public MerchantDTO queryMerchantById(Long id);
+
+
+
 }
