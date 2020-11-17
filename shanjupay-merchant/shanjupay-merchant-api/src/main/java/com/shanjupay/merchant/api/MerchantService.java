@@ -21,5 +21,12 @@ public interface MerchantService {
     public MerchantDTO queryMerchantById(Long id);
 
 
+    /** 商户注册
+     * @param merchantDTO 商户信息
+     * @return
+     */
+    MerchantDTO createMerchant(MerchantDTO merchantDTO);
+
+
 
 }

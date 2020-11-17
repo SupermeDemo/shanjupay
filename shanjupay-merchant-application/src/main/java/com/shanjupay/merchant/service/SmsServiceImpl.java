@@ -78,5 +78,32 @@ public class SmsServiceImpl implements SmsService{
         return key;
     }
 
+    /**校验验证码 抛出异常校验无效
+     *
+     * @param verifiyKey  验证码的key
+     * @param verifiyCode 验证码
+     */
+    @Override
+    public void checkVerifiyCode(String verifiyCode, String verifiyKey) {
+
+        //http://localhost:56085/sailing/verify?name=sms&verificationCode=126319&verificationKey=sms%3Ac068eac11ff1467b87534e8d78beb141
+        String url = smsurl+"/verify?name=sms&verificationCode="+verifiyCode+"&verificationKey="+verifiyKey;
+        Map bodyMap = null;
+
+        try {
+            //请求校验验证码
+            ResponseEntity<Map> exchange = restTemplate.exchange(url, HttpMethod.POST, HttpEntity.EMPTY, Map.class);
+            bodyMap = exchange.getBody();
+            log.info("校验码,响应内容:{}",JSON.toJSONString(bodyMap));
+        } catch (RestClientException e) {
+            e.printStackTrace();
+            log.info(e.getMessage(),e);
+            throw new RuntimeException("验证码错误");
+        }
+        if(bodyMap == null || bodyMap.get("result") == null || !(Boolean) bodyMap.get("result")){
+            throw new RuntimeException("发送验证错误");
+        }
+    }
+
 
 }
